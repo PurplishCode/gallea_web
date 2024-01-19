@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('foto', function (Blueprint $table) {
             $table->id("fotoID");
+            $table->string("judulFoto")->unique();
+            $table->string("deskripsiFoto");
+            $table->date("tanggalUnggah");
+            $table->string("lokasiFile");
+            $table->unsignedBigInteger("albumID");
+            $table->unsignedBigInteger("userID");
 
-            $table->unsignedInteger("userID");
 
-            $table->foreign("userID")->references("userID")->on("user");
+            $table->foreign("albumID")->references("albumID")->on("album");
+            $table->foreign("userID")->references("userID")->on("users");
         });
     }
 

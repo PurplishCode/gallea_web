@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('komentar_fotos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('komentar_foto', function (Blueprint $table) {
+            $table->id("komentarID");
+            $table->unsignedBigInteger("fotoID");
+            $table->unsignedBigInteger("userID");
+            $table->text("isiKomentar");
+            $table->date("tanggalKomentar");
+
+            $table->foreign("fotoID")->references("fotoID")->on("foto");
+            $table->foreign("userID")->references("userID")->on("users");
         });
     }
 

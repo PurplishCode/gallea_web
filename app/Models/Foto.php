@@ -17,8 +17,8 @@ class Foto extends Model
         "lokasiFile",
     ];
 
-public function user()
-{
-    $this->belongsTo(User::class, "userID");
-}
+// public function user()
+// {
+//     $this->belongsTo(User::class, "userID");
+// }
 }

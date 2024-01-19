@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FotoController;
 use App\Http\Controllers\ShiftController;
 use App\Models\Foto;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
+
 Route::get('/', [ShiftController::class, "directGuest"]);
-Route::get('/show-create', [Foto::class, "show"]);
+Route::get('/show/post', [FotoController::class, "create"]);
+Route::post('post.gambar', [FotoController::class, "store"]);
+

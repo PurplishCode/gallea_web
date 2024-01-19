@@ -13,4 +13,11 @@ return view("pages.landing", [
 "title" => "DUG | Landing"
 ]);
     }
+
+    public function directLogin()
+    {
+        return view('pages.login', [
+            "title" => "UDG | Login"
+        ]);
+    }
 }

@@ -23,7 +23,9 @@ class FotoController extends Controller
      */
     public function create()
     {
-        //
+        return view("gallery.create", [
+            "title" => "UDC | Post Image"
+        ]);
     }
 
     /**
@@ -34,13 +36,21 @@ class FotoController extends Controller
 
         $request->validate([
             "judulFoto" => "required|string|max:30",
-            "deskripsi" => "required|string|max:254",
-            "lokasiFile" => "required|image|mimes:png,jpg|max:2046",
-        
+            "deskripsi" => "required|string|max:254",        
         ]);
 
-        $request->validate();
-        return back()->with("success", "You have succesfully created the image!")->with("image", );
+        if($request->hasFile("lokasiFile")){
+$request->validate([
+    "lokasiFile" => "required|mimes:png,jpg"
+]);
+        }
+
+$imageName = time().".".$request->lokasiFile->extension();
+
+Foto::create();
+
+toast("Succesfully Created Image!", "success");
+        return back()->with("success", "You have succesfully created the image!")->with("image", $imageName);
     }
 
     /**

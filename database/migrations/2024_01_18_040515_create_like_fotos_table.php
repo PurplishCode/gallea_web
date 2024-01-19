@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('like_fotos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('like_foto', function (Blueprint $table) {
+            $table->id("likeID");
+            $table->unsignedBigInteger("fotoID")->index();
+            $table->unsignedBigInteger("userID")->index();
+            $table->date("tanggalLike");
+
+            $table->foreign("fotoID")->references("fotoID")->on("foto");
+            $table->foreign("userID")->references("userID")->on("users");
         });
     }
 

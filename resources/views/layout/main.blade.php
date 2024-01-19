@@ -10,6 +10,6 @@
 <body>    
 
     @yield('section')
-    
+  
 </body>
 </html>

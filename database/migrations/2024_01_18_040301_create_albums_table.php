@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('album', function (Blueprint $table) {
             $table->id("albumID");
-            $table->timestamps();
+            $table->string("namaAlbum");
+            $table->text("deskripsi");
+            $table->date("tanggalDibuat");
+            $table->unsignedBigInteger("userID");
+          
+
+            $table->foreign("userID")->references("userID")->on("users");
         });
     }
 
