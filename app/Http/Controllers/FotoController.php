@@ -15,7 +15,10 @@ class FotoController extends Controller
      */
     public function index()
     {
-        //
+        // Temporary Index for displaying photo.
+        return view("gallery.index",[
+            "title" => "UDC | List Foto"
+        ]);
     }
 
     /**

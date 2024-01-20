@@ -21,4 +21,8 @@ Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest
 Route::get('/', [ShiftController::class, "directGuest"]);
 Route::get('/show/post', [FotoController::class, "create"]);
 Route::post('post.gambar', [FotoController::class, "store"]);
+Route::get('/table-user', [ShiftController::class, "listData"]);
 
+Route::post('login', [ShiftController::class, "login"]);
+
+Route::get('/list-gallery', [FotoController::class, "index"]);
