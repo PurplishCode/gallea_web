@@ -51,5 +51,20 @@ class User extends Authenticatable
     $this->hasMany(Foto::class, "userID");
 }
 
+public function album()
+{
+    $this->hasMany(album::class,"albumID");
+}
+
+public function komentarFoto()
+{
+    $this->hasMany(komentarFoto::class, "userID");
+}
+
+public function likeFoto()
+{
+    $this->hasMany(likeFoto::class, "userID");
+
+}
 
 }

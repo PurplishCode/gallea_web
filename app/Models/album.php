@@ -10,6 +10,20 @@ class album extends Model
     use HasFactory;
 
     protected $table = "album";
+  
+    protected $fillable = [
+        "namaAlbum",
+        "deskrpisi",
+        "tanggalDibuat",
+    ];
 
+public function foto()
+{
+    $this->hasMany(Foto::class, "fotoID");
+}
 
+public function user()
+{
+    $this->belongsTo(User::class, "userID");
+}
 }

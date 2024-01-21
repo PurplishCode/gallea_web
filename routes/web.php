@@ -26,3 +26,8 @@ Route::get('/table-user', [ShiftController::class, "listData"]);
 Route::post('login', [ShiftController::class, "login"]);
 
 Route::get('/list-gallery', [FotoController::class, "index"]);
+
+Route::get("/layout-sidenav", function()
+{
+return view('layout.sidenav');
+});

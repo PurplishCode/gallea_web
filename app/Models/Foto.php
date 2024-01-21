@@ -13,9 +13,28 @@ class Foto extends Model
     protected $fillable = [
         "judulFoto",
         "deskripsiFoto",
-        "tanggalUnggah",
         "lokasiFile",
     ];
+
+public function album()
+{
+    $this->belongsTo(album::class, "albumID");
+}
+
+public function user()
+{
+    $this->belongsTo(User::class, "userID");
+}
+
+public function komentarFoto()
+{
+    $this->hasMany(KomentarFoto::class, "fotoID");
+}
+
+public function likeFoto()
+{
+    $this->hasMany(LikeFoto::class, "fotoID");
+}
 
 // public function user()
 // {

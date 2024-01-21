@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFotoRequest;
 use App\Http\Requests\UpdateFotoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class FotoController extends Controller
 {
@@ -37,23 +38,27 @@ class FotoController extends Controller
     public function store(Request $request) :RedirectResponse
     {
 
-        $request->validate([
-            "judulFoto" => "required|string|max:30",
-            "deskripsi" => "required|string|max:254",        
-        ]);
-
-        if($request->hasFile("lokasiFile")){
 $request->validate([
-    "lokasiFile" => "required|mimes:png,jpg"
+    "judulFoto" => "string|required|max:30",
+    "deskripsiFoto" => "string|required|max:200",
+    "tanggalUnggah" => "date",
+    "lokasiFile" => "mimes:png,jpg|required"
 ]);
-        }
 
-$imageName = time().".".$request->lokasiFile->extension();
+$ambilFile = $request->file("lokasiFile");
+$tambahExtensiFile = $ambilFile->extension();
+$namaFile = date("ymhdis") . "." . $tambahExtensiFile;
+$ambilFile->move(public_path("img/gallery", $namaFile));
 
-Foto::create();
+$dataFoto = [
+    "judulFoto" => $request->judulFoto,
+    "deskripisiFoto" => $request->deskripsiFoto,
+    "tanggalUnggah" => now(),
+    "lokasiFile" => $namaFile,
+];
 
-toast("Succesfully Created Image!", "success");
-        return back()->with("success", "You have succesfully created the image!")->with("image", $imageName);
+Foto::create($dataFoto);
+return redirect()->with("succesful", "Data was succesfully created!");
     }
 
     /**
