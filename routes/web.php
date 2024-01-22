@@ -25,6 +25,10 @@ Route::get('/table-user', [ShiftController::class, "listData"]);
 
 Route::post('login', [ShiftController::class, "login"]);
 
+Route::get('/register', [ShiftController::class, "show"]);
+
+Route::post('register', [ShiftController::class, "register"]);
+
 Route::get('/list-gallery', [FotoController::class, "index"]);
 
 Route::get("/layout-sidenav", function()

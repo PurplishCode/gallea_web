@@ -47,4 +47,37 @@ return view("pages.landing", [
         }
         }
     }
+
+    public function register(Request $request)
+    {
+    $request->validate([
+"username" => "string|required|max:20",
+"email" => "string|required|max:25",
+"password" => "string|required|max:15",
+"namaLengkap" => "string|required|max:25",
+"alamat" => "string|required|max:254"
+    ]);
+
+    $fullData = [
+"username" => $request->username,
+"email" => $request->email,
+"password" => Hash::make($request->password),
+"namaLengkap" => $request->namaLengkap,
+"alamat" => $request->alamat
+
+    ];
+
+
+
+    User::create($fullData);
+
+    return view("pages.login")->with("succesfull", "Succesfully created an Account!");
+}
+
+public function show()
+{
+    return view('pages.register', [
+        "title" => "UDC | Registration"
+    ]);
+}
 }
