@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("lokasiFile");
             $table->unsignedBigInteger("albumID");
             $table->unsignedBigInteger("userID");
-
+           $table->timestamps();
 
             $table->foreign("albumID")->references("albumID")->on("album");
             $table->foreign("userID")->references("userID")->on("users");

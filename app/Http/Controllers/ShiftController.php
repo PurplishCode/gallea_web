@@ -3,24 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class ShiftController extends Controller
 {
     public function directGuest()
     {
 return view("pages.landing", [
-"title" => "DUG | Landing"
+"title" => "UDC | Landing"
 ]);
     }
+
+public function welcome()
+{
+    return view("pages.landing",[
+        "title" => "UDC | Welcome Page"
+    ]);
+}
 
     public function directLogin()
     {
         return view('pages.login', [
-            "title" => "UDG | Login"
+            "title" => "UDC | Login"
         ]);
     }
 
@@ -34,19 +43,28 @@ return view("pages.landing", [
     ]);
     }
 
-    public function login(Request $request)
-    {
-      $dataValidate = User::where('email', $request->email)->first();
+        public function login(Request $request)
+        {
+        $dataValidate = User::where('email', $request->email)->first();
 
-        if($dataValidate && Hash::check($request->password, $dataValidate->password)) {
-        $credentials = ["email" => $dataValidate->email, "password" => $request->password];
+            if($dataValidate && Hash::check($request->password, $dataValidate->password)) {
 
-        if(Auth::attempt($credentials)) {
-            // do Something nerd.
-            return redirect()->route("/list-gallery")->with("succesful", "Login is succesful!");
+            $credentials = $request->only('email','password');
+
+            if(Auth::attempt($credentials)) {
+        // Authetication checked. Do something.
+    Log::info("Logged in!", $credentials);
+
+
+    return redirect()->route("home");
+
+            } else {
+                Log::info("Failed.");
+                
+                return redirect()->back()->with("failed", "The Login was unsucessful.");
+            }
+            }
         }
-        }
-    }
 
     public function register(Request $request)
     {
@@ -70,8 +88,10 @@ return view("pages.landing", [
 
 
     User::create($fullData);
+    
+toast("successful", "The user has successfully logged in!", "top-right");
 
-    return view("pages.login")->with("succesfull", "Succesfully created an Account!");
+    return redirect()->route("login.display")->with("succesful", "Succesfully created an Account!");
 }
 
 public function show()
@@ -80,4 +100,21 @@ public function show()
         "title" => "UDC | Registration"
     ]);
 }
+
+public function logout()
+{
+    Log::info("Session is still intact",session()->all());
+
+    Auth::logout();
+    session()->flush();
+
+// Logging info, indicating the session is now gone. Check laravel.log for information.
+Log::info("Session is gone.");
+
+return redirect()->route("login.display");
+
+
+}
+
+
 }

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger("fotoID")->index();
             $table->unsignedBigInteger("userID")->index();
             $table->date("tanggalLike");
+            $table->timestamps();
+
 
             $table->foreign("fotoID")->references("fotoID")->on("foto");
             $table->foreign("userID")->references("userID")->on("users");

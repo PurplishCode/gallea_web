@@ -17,6 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
+     protected $table = "users";
+     // Please for the love of god. Don't forget about this for the session authentications default value!
+protected $primaryKey = "userID";
+
+
     protected $fillable = [
         'username',
         'email',

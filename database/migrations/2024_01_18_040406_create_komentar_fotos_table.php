@@ -17,6 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger("userID");
             $table->text("isiKomentar");
             $table->date("tanggalKomentar");
+            $table->timestamps();
+
 
             $table->foreign("fotoID")->references("fotoID")->on("foto");
             $table->foreign("userID")->references("userID")->on("users");

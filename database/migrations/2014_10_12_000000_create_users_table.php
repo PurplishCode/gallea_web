@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("namaLengkap");
             $table->text("alamat");
             $table->rememberToken();
-           
+           $table->timestamps();
         });
     }
 

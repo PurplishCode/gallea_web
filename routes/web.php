@@ -16,22 +16,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
 
-Route::get('/', [ShiftController::class, "directGuest"]);
-Route::get('/show/post', [FotoController::class, "create"]);
-Route::post('post.gambar', [FotoController::class, "store"]);
-Route::get('/table-user', [ShiftController::class, "listData"]);
+Route::middleware("redirectIfAuth")->group(function(){
+  Route::get('/', [ShiftController::class, "welcome"]);
+    Route::get("/login", [ShiftController::class, "directLogin"])->name("login.display");
+    Route::get("/register", [ShiftController::class, "show"])->name("register");
 
-Route::post('login', [ShiftController::class, "login"]);
-
-Route::get('/register', [ShiftController::class, "show"]);
-
-Route::post('register', [ShiftController::class, "register"]);
-
-Route::get('/list-gallery', [FotoController::class, "index"]);
-
-Route::get("/layout-sidenav", function()
-{
-return view('layout.sidenav');
 });
+
+  Route::middleware("auth")->group(function(){
+    Route::get("/home", [FotoController::class, "index"])->name("home");
+    Route::get("/table-data", [ShiftController::class, "listData"])->name("showdata");
+    
+   });
+
+Route::post("login", [ShiftController::class, "login"])->name("login");
+
+Route::post("register", [ShiftController::class, "register"])->name("register");
+
+Route::post("logout", [ShiftController::class, "logout"])->name("logout");
+
+// Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
+
+// Route::get('/', [ShiftController::class, "directGuest"]);
+// Route::get('/show/post', [FotoController::class, "create"]);
+// Route::post('post.gambar', [FotoController::class, "store"]);
+// Route::get('/table-user', [ShiftController::class, "listData"]);
+
+// Route::post('login', [ShiftController::class, "login"])->name("login");
+
+// Route::get('/register', [ShiftController::class, "show"])->middleware("guest");
+
+// Route::post('register', [ShiftController::class, "register"])->name("register");
+
+// Route::get('/list-gallery', [FotoController::class, "index"])->name("list-gallery");
+
+// Route::get("/layout-sidenav", function()
+// {
+// return view('layout.sidenav');
+// });
+
+// Route::get('logout', [ShiftController::class, "logout"])->name("logout");

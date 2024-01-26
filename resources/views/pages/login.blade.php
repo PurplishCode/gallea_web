@@ -14,13 +14,20 @@
     <title>{{ $title }}</title>
 </head>
 <body class="min-vh-100 bg-dark" style="background: linear-gradient(to bottom, #4324234, #4343432);">
+    @if (Session::get("error"))
+    <div>{{ Session::get("error") }}</div>        
+    @endif
+
+    @if (Session::get("succesful"))
+    <div>{{ Session::get("succesful") }}</div>        
+    @endif
 
 <section class="d-flex justify-content-center text-center text-white min-vh-100">
 <div class="card border-secondary mt-5" style="width: 370px;height:440px;background:rgba(18, 18, 87, 0.404);">
   <div class="pt-4"><img src="{{ asset('Logo_EDR.png') }}" class="border-secondary border-rounded" style="width:50px;"></div>
   <div class="pt-3"><h4 class="text-bold" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">LOGIN</h4></div>
   <div class="d-flex">
-    <form class="form-group" action="{{ url('login') }}" method="POST">
+    <form class="form-group" action="{{ route('login') }}" method="POST">
         @csrf
         @method("POST")
         <div class="p-3">

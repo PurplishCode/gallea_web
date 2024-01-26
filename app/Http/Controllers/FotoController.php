@@ -7,7 +7,9 @@ use App\Http\Requests\StoreFotoRequest;
 use App\Http\Requests\UpdateFotoRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Log;
 
 class FotoController extends Controller
 {
@@ -16,10 +18,19 @@ class FotoController extends Controller
      */
     public function index()
     {
+        if(Auth::check()) {
+            Log::info("User is still authenticated!");
+            
+            return view("gallery.index", ["title" => "UDC | Home Page"]);
+        } else {
+            Log::info("User is not authenticated.");
+            
+            toast("error", "Sorry, but this page is restricted.");
+
+            return redirect()->back();
+        }
         // Temporary Index for displaying photo.
-        return view("gallery.index",[
-            "title" => "UDC | List Foto"
-        ]);
+       
     }
 
     /**
@@ -74,7 +85,7 @@ return redirect()->with("succesful", "Data was succesfully created!");
      */
     public function edit(Foto $foto)
     {
-        //
+    
     }
 
     /**

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text("deskripsi");
             $table->date("tanggalDibuat");
             $table->unsignedBigInteger("userID");
-          
+          $table->timestamps();
 
             $table->foreign("userID")->references("userID")->on("users");
         });

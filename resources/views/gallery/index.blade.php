@@ -7,6 +7,19 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    
+    @extends('layout.main')
+
+    <div>{{ Session::get("email") }}</div>
+
+    <div>{{ Session::get("success") }}</div>
+
+    @section('content')
+
+    <form method="POST" action="{{ route('logout') }}">
+        @method("POST")
+        @csrf
+    <button type="submit" class="btn btn-primary">LOGOUT</button>
+    </form>
+
 </body>
 </html>
