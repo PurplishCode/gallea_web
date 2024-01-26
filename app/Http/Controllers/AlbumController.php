@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\album;
 use App\Http\Requests\StorealbumRequest;
 use App\Http\Requests\UpdatealbumRequest;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AlbumController extends Controller
 {
@@ -13,7 +16,11 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+
+
+        return view('album.index', [
+            "title" => "UDC | Album Foto"
+        ]);
     }
 
     /**
@@ -27,9 +34,31 @@ class AlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorealbumRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            "namaAlbum" => "string|required|max:30",
+            "deskripsi" => "string|required|max:15",
+            "tanggalDibuat" => "date"
+        ]);
+
+        $dataIsi = [
+            "namaAlbum" => $request->namaAlbum,
+            "deskripsi" => $request->deskripsi,
+            "tanggalDibuat" => now(),
+            "userID" => auth()->user()->userID
+        ];
+
+
+        $dataSuccess = album::create($dataIsi);
+    if($dataSuccess) {
+        Session::flash("succesful", $request->namAlbum);
+        Log::info("Album has successfully added!", $dataSuccess);
+        return redirect()->back();
+    } else {
+Log::info("Album failed to be added.");
+return redirect()->back();    
+}
     }
 
     /**

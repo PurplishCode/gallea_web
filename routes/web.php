@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\ShiftController;
 use App\Models\Foto;
@@ -27,6 +28,7 @@ Route::middleware("redirectIfAuth")->group(function(){
   Route::middleware("auth")->group(function(){
     Route::get("/home", [FotoController::class, "index"])->name("home");
     Route::get("/table-data", [ShiftController::class, "listData"])->name("showdata");
+    Route::get("/home/album", [AlbumController::class, "index"])->name("home.album");
     
    });
 
@@ -35,6 +37,10 @@ Route::post("login", [ShiftController::class, "login"])->name("login");
 Route::post("register", [ShiftController::class, "register"])->name("register");
 
 Route::post("logout", [ShiftController::class, "logout"])->name("logout");
+
+Route::get('/layout-sidenav', function () {
+    return view('layout.sidenav');
+});
 
 // Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
 

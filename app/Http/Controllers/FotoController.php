@@ -19,13 +19,12 @@ class FotoController extends Controller
     public function index()
     {
         if(Auth::check()) {
-            Log::info("User is still authenticated!");
+            Log::info("User is authenticated!");
             
             return view("gallery.index", ["title" => "UDC | Home Page"]);
         } else {
             Log::info("User is not authenticated.");
-            
-            toast("error", "Sorry, but this page is restricted.");
+        
 
             return redirect()->back();
         }

@@ -8,18 +8,20 @@
 </head>
 <body>
     @extends('layout.main')
+@section('content')
+<div>hiweqeqe</div>
+@endsection
 
-    <div>{{ Session::get("email") }}</div>
 
-    <div>{{ Session::get("success") }}</div>
-
-    @section('content')
-
-    <form method="POST" action="{{ route('logout') }}">
+   @if (Session::get("successful"))
+       <div class="alert alert-warning" role="warning">{{ Session::get("successful") }}</div>
+   @endif
+ 
+    {{-- Form LOGOUT --}}
+    {{-- <form method="POST" action="{{ route('logout') }}">
         @method("POST")
         @csrf
     <button type="submit" class="btn btn-primary">LOGOUT</button>
-    </form>
-
+    </form> --}}
 </body>
 </html>

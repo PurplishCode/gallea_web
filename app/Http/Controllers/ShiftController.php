@@ -55,7 +55,7 @@ public function welcome()
         // Authetication checked. Do something.
     Log::info("Logged in!", $credentials);
 
-
+Session::flash("successful", "Succesfully logged in!");
     return redirect()->route("home");
 
             } else {
@@ -89,7 +89,7 @@ public function welcome()
 
     User::create($fullData);
     
-toast("successful", "The user has successfully logged in!", "top-right");
+toast("succesful", "The user has successfully logged in!", "top-right");
 
     return redirect()->route("login.display")->with("succesful", "Succesfully created an Account!");
 }
