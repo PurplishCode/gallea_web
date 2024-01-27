@@ -2,14 +2,9 @@
 <html lang="en">
 <head>
     <style>
-        .stayactive {
-            display: none;
-        }
+        
 
-        .stayactive.active {
-            display: block;
-        }
-
+        
         .colorDime {
             color:bisque
         }
@@ -26,20 +21,20 @@ html, body {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
-
+<body>
 <div class="container-fluid p-0 d-flex h-100">
     <div id="bdSidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white  offcanvas-start pl-4">
 <a href="#" class="navbar-brand text-center fw-bold" style="color:blueviolet">UDC</a>
 <hr>
 <ul class="colorDime nav nav-pills flex-column mb-auto">
     <li class="nav-item mb-1">
-        <a href="#" class="colorDime pl-3" style="text-decoration: none;">
+        <a href="{{ route('home.album') }}" class="colorDime pl-3" style="text-decoration: none;">
             <i class="colorDime fa-regular fa-image pe-2"></i>
             <span class="topic">Albums</span>
         </a>
     </li>
     <li class="nav-item mb-1 pt-3">
-        <a href="#" class="colorDime" style="text-decoration: none;">
+        <a href="{{ route("home.gallery") }}" class="colorDime" style="text-decoration: none;">
             <i class="colorDime fa-regular fa-camera pe-2"></i>
             <span class="topic">Foto</span>
         </a>
@@ -61,16 +56,7 @@ html, body {
     </li>
 </ul>
 
-    </div>
-    <div class="bg-light flex-fill"> 
-        <div class="p-2 d-md-none d-flex text-white bg-success"> 
-            <a href="#" class="text-white" 
-               data-bs-toggle="offcanvas"
-               data-bs-target="#bdSidebar"> 
-                <i class="fa-solid fa-bars"></i> 
-            </a> 
-            <span class="ms-3">GFG Portal</span> 
-        </div> 
+
 </div>
 </body>
 </html>

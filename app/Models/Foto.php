@@ -10,6 +10,9 @@ class Foto extends Model
     use HasFactory;
     protected $table = "foto";
 
+    protected $primaryKey = "fotoID";
+
+
     protected $fillable = [
         "judulFoto",
         "deskripsiFoto",

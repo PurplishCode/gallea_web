@@ -16,10 +16,11 @@ class AlbumController extends Controller
      */
     public function index()
     {
-
+$dataAlbum = album::all();
 
         return view('album.index', [
-            "title" => "UDC | Album Foto"
+            "title" => "UDC | Album Foto",
+            "dataAlbum" => $dataAlbum
         ]);
     }
 
@@ -28,7 +29,9 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        //
+        return view("album.create",[
+            "title" => "UDC | Buat Album"
+        ]);
     }
 
     /**
@@ -38,7 +41,7 @@ class AlbumController extends Controller
     {
         $request->validate([
             "namaAlbum" => "string|required|max:30",
-            "deskripsi" => "string|required|max:15",
+            "deskripsi" => "string|required|max:255",
             "tanggalDibuat" => "date"
         ]);
 
@@ -53,7 +56,6 @@ class AlbumController extends Controller
         $dataSuccess = album::create($dataIsi);
     if($dataSuccess) {
         Session::flash("succesful", $request->namAlbum);
-        Log::info("Album has successfully added!", $dataSuccess);
         return redirect()->back();
     } else {
 Log::info("Album failed to be added.");

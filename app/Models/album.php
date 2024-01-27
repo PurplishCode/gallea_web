@@ -10,11 +10,14 @@ class album extends Model
     use HasFactory;
 
     protected $table = "album";
-  
+
+    protected $primaryKey = "albumID";
+
     protected $fillable = [
         "namaAlbum",
-        "deskrpisi",
+        "deskripsi",
         "tanggalDibuat",
+        "userID"
     ];
 
 public function foto()
