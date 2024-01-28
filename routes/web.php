@@ -32,6 +32,8 @@ Route::middleware("redirectIfAuth")->group(function(){
   Route::get('/home/foto', [FotoController::class, "index"])->name("home.gallery");
   
   Route::get('/album/create', [AlbumController::class, "create"])->name("create.album");
+
+  Route::get('/foto/create', [FotoController::class, "create"])->name("create.gallery");
    });
 
 Route::post("login", [ShiftController::class, "login"])->name("login");
@@ -45,6 +47,8 @@ Route::get('/layout-sidenav', function () {
 });
 
 Route::post('post-album', [AlbumController::class, "store"])->name('post.album');
+
+Route::post('post-gambar', [FotoController::class, "store"])->name('post-gambar');
 
 // Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
 

@@ -32,6 +32,26 @@ protected $primaryKey = "userID";
     
     ];
 
+    public function foto()
+{
+    return $this->hasMany(Foto::class, "userID");
+}
+
+public function album()
+{
+    return $this->hasMany(album::class, "albumID");
+}
+
+public function komentarFoto()
+{
+    return $this->hasMany(komentarFoto::class, "userID");
+}
+
+public function likeFoto()
+{
+    return $this->hasMany(likeFoto::class, "userID");
+
+}
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -52,25 +72,5 @@ protected $primaryKey = "userID";
         'password' => 'hashed',
     ];
 
-    public function foto()
-{
-    $this->hasMany(Foto::class, "userID");
-}
-
-public function album()
-{
-    $this->hasMany(album::class,"albumID");
-}
-
-public function komentarFoto()
-{
-    $this->hasMany(komentarFoto::class, "userID");
-}
-
-public function likeFoto()
-{
-    $this->hasMany(likeFoto::class, "userID");
-
-}
 
 }

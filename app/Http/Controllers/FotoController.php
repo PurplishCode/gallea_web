@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Foto;
 use App\Http\Requests\StoreFotoRequest;
 use App\Http\Requests\UpdateFotoRequest;
+use App\Models\album;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class FotoController extends Controller
 {
@@ -18,9 +20,13 @@ class FotoController extends Controller
      */
     public function index()
     {
+
+
         if(Auth::check()) {
             Log::info("User is authenticated!");
-            
+
+           
+
             return view("gallery.index", ["title" => "UDC | Home Page"]);
         } else {
             Log::info("User is not authenticated.");
@@ -37,8 +43,11 @@ class FotoController extends Controller
      */
     public function create()
     {
+        $albumData = album::all();
+
         return view("gallery.create", [
-            "title" => "UDC | Post Image"
+            "title" => "UDC | Post Image",
+            "albumData" => $albumData
         ]);
     }
 
@@ -48,27 +57,52 @@ class FotoController extends Controller
     public function store(Request $request) :RedirectResponse
     {
 
-$request->validate([
-    "judulFoto" => "string|required|max:30",
-    "deskripsiFoto" => "string|required|max:200",
-    "tanggalUnggah" => "date",
-    "lokasiFile" => "mimes:png,jpg|required"
-]);
+// $request->validate([
+//     "judulFoto" => "string|required|max:30",
+//     "deskripsiFoto" => "string|required|max:200",
+//     "tanggalUnggah" => "date",
+//     "lokasiFile" => "mimes:png,jpg|required"
+// ]);
+$user = auth()->user();
+$album = $user->album;
+
+if(!$album || $album->isEmpty()) {
+
+}
+
+
+
+
+
+$finds = $album->find("albumID", $request->albumID);
 
 $ambilFile = $request->file("lokasiFile");
-$tambahExtensiFile = $ambilFile->extension();
-$namaFile = date("ymhdis") . "." . $tambahExtensiFile;
-$ambilFile->move(public_path("img/gallery", $namaFile));
+$extensiFile = $ambilFile->extension();
+$namaFile = date('ymdhis') . '.' . $extensiFile;
+
+$path = "public/img";
+$storePath = Storage::putFileAs($path, $ambilFile, $namaFile);
+
 
 $dataFoto = [
     "judulFoto" => $request->judulFoto,
-    "deskripisiFoto" => $request->deskripsiFoto,
+    "deskripsiFoto" => $request->deskripsiFoto,
     "tanggalUnggah" => now(),
+    "userID" => $user->userID,
+    "albumID" => $finds,
     "lokasiFile" => $namaFile,
 ];
 
-Foto::create($dataFoto);
-return redirect()->with("succesful", "Data was succesfully created!");
+Log::info($dataFoto);
+
+if($storePath == true) {
+    Foto::create($dataFoto);
+}
+
+
+return redirect()->back()->with("succesful", "Data was succesfully created!");
+
+
     }
 
     /**

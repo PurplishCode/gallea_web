@@ -8,16 +8,16 @@
     <title>{{ $title }}</title>
 </head>
 <body>
-    @include('layout.main')
+    @extends('layout.main')
 
 @section('content')
+<div class="btn btn-primary">
+    
+<a href="{{ route('create.gallery') }}" style="text-decoration: none; color:aliceblue">Tambahkan Foto</a>
 
+</div>
 @endsection
 
-
-   @if (Session::get("successful"))
-       <div class="alert alert-warning" role="warning">{{ Session::get("successful") }}</div>
-   @endif
  
     {{-- Form LOGOUT --}}
     {{-- <form method="POST" action="{{ route('logout') }}">

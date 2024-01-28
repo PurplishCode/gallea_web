@@ -17,16 +17,17 @@ class album extends Model
         "namaAlbum",
         "deskripsi",
         "tanggalDibuat",
-        "userID"
+        "userID",
+        "albumID"
     ];
 
 public function foto()
 {
-    $this->hasMany(Foto::class, "fotoID");
+    return $this->hasMany(Foto::class, "fotoID");
 }
 
 public function user()
 {
-    $this->belongsTo(User::class, "userID");
+    return $this->belongsTo(User::class, "userID");
 }
 }
