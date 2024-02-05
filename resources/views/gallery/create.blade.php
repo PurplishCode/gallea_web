@@ -34,9 +34,9 @@ e<!DOCTYPE html>
                     <input name="lokasiFile" class="form-control border-secondary" type="file" placeholder="lokasiFile" style="width: 310px;" aria-describedby="basic-addon1"  >
                     
                     <select name="albumID" id="albumID">
-                        @foreach ($albumData as $album)
-                            <option value="{{ $album->albumID }}">{{ $album->namaAlbum }}</option>
-                        @endforeach
+                    @foreach($albumData as $album)
+                        <option value="{{ $album->albumID }}">{{ $album->namaAlbum }}</option>
+                    @endforeach    
                     </select>
     <div class="btn btn-primary">
         <button type="submit" class="btn btn-primary">SUBMIT</button>

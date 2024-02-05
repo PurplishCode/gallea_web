@@ -17,7 +17,9 @@
     <div class="card-body">
     <h5 class="card-title">{{ $data->namaAlbum }}</h5><p class="card-text">{{ $data->deskripsi }}</p>   
     </div>
- 
+ <div class="card-text d-flex justify-content-center align-items-center">
+  <a href="{{ route('albums.showPhotos', ['albumID' => $data->albumID]) }}" class="btn btn-primary">View Gallery</a> 
+</div>
 </div>
   </div>
     @endforeach

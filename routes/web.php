@@ -34,6 +34,8 @@ Route::middleware("redirectIfAuth")->group(function(){
   Route::get('/album/create', [AlbumController::class, "create"])->name("create.album");
 
   Route::get('/foto/create', [FotoController::class, "create"])->name("create.gallery");
+
+  Route::get('/album/{albumID}/foto', [AlbumController::class, "showPhotos"])->name('albums.showPhotos');
    });
 
 Route::post("login", [ShiftController::class, "login"])->name("login");

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\album;
 use App\Http\Requests\StorealbumRequest;
 use App\Http\Requests\UpdatealbumRequest;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -93,5 +94,13 @@ return redirect()->back();
     public function destroy(album $album)
     {
         //
+    }
+
+    public function showPhotos($albumID) {
+   $users = User::with("album.foto")->get();
+
+$assocAlbum = album::with('album')->where("albumID", '=',  "$albumID")->firstOrFail()->get();
+
+   return view('album.list', compact($assocAlbum))->with('title', "UDC | List Album $albumID");
     }
 }

@@ -25,9 +25,9 @@ class FotoController extends Controller
         if(Auth::check()) {
             Log::info("User is authenticated!");
 
-           
+           $fotoData = Foto::all();
 
-            return view("gallery.index", ["title" => "UDC | Home Page"]);
+            return view("gallery.index", ["title" => "UDC | Home Page", "fotoData" => $fotoData]);
         } else {
             Log::info("User is not authenticated.");
         
@@ -69,11 +69,6 @@ $album = $user->album;
 if(!$album || $album->isEmpty()) {
 
 }
-
-
-
-
-
 $finds = $album->find("albumID", $request->albumID);
 
 $ambilFile = $request->file("lokasiFile");
@@ -83,6 +78,7 @@ $namaFile = date('ymdhis') . '.' . $extensiFile;
 $path = "public/img";
 $storePath = Storage::putFileAs($path, $ambilFile, $namaFile);
 
+$ambilFile->move(public_path("img"), $namaFile);
 
 $dataFoto = [
     "judulFoto" => $request->judulFoto,
@@ -108,9 +104,10 @@ return redirect()->back()->with("succesful", "Data was succesfully created!");
     /**
      * Display the specified resource.
      */
-    public function show(Foto $foto)
+    public function show($albumID)
     {
-        //
+
+
     }
 
     /**
