@@ -6,12 +6,14 @@ use App\Models\Foto;
 use App\Http\Requests\StoreFotoRequest;
 use App\Http\Requests\UpdateFotoRequest;
 use App\Models\album;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class FotoController extends Controller
 {
@@ -113,9 +115,13 @@ return redirect()->back()->with("succesful", "Data was succesfully created!");
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Foto $foto)
+    public function edit(Request $request, $fotoID)
     {
     
+        $fotoTake = Foto::find($fotoID);
+$fotoTake->update($request->all());
+
+return redirect()->route("");
     }
 
     /**
@@ -129,8 +135,15 @@ return redirect()->back()->with("succesful", "Data was succesfully created!");
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Foto $foto)
+    public function destroy($fotoID)
     {
-        //
+        $fotoData = Foto::find($fotoID);
+
+        if(!$fotoData) {
+            Log::info("Data is unsuccesful to delete.");
+            return redirect()->back();
+        }
+
+        $fotoData->delete();
     }
 }

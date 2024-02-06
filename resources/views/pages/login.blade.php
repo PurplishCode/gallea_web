@@ -32,13 +32,13 @@
         @method("POST")
         <div class="p-3">
             <label for="email" class="form-label d-flex flex-column-start">E-MAIL:</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 310px;" name="email">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 310px;" name="email" required>
     <div id="emailHelp" class="form-text text-white d-flex flex-column-start">We'll never share your E-mail to anyone.</div>
     </div>
     
     <div class="p-3">
         <label for="password" class="form-label d-flex flex-column-start">PASSWORD:</label>
-    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 310px;" name="password">
+    <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 310px;" name="password" required>
 </div>
 <div class="pt-4">
     <button type="submit" class="btn btn-secondary" style="width: 250px">SUBMIT</button>

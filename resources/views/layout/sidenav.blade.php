@@ -34,13 +34,13 @@ html, body {
         </a>
     </li>
     <li class="nav-item mb-1 pt-3">
-        <a href="{{ route("home.gallery") }}" class="colorDime" style="text-decoration: none;">
+        <a href="{{ route("home") }}" class="colorDime" style="text-decoration: none;">
             <i class="colorDime fa-regular fa-camera pe-2"></i>
             <span class="topic">Foto</span>
         </a>
     </li>
    <li class="sidebar-item nav-item mb-1 pt-3">
-<a href="#" class="sidebar-link collapsed colorDime" style="text-decoration: none" aria-expanded="false" data-bs-target="#settings" data-bs-toggle="collapse" aria-controls="settings">
+<a href="{{ route('logoutPath') }}" class="sidebar-link collapsed colorDime" style="text-decoration: none" aria-expanded="false" data-bs-target="#settings" data-bs-toggle="collapse" aria-controls="settings">
 <i class="fa-regular fa-cog pe-2"></i>
 <span class="topic">Settings</span>
 </a>

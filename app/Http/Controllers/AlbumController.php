@@ -99,8 +99,8 @@ return redirect()->back();
     public function showPhotos($albumID) {
    $users = User::with("album.foto")->get();
 
-$assocAlbum = album::with('album')->where("albumID", '=',  "$albumID")->firstOrFail()->get();
+$assocAlbum = album::with('foto')->findOrFail($albumID);
 
-   return view('album.list', compact($assocAlbum))->with('title', "UDC | List Album $albumID");
+   return view('album.list', compact("assocAlbum"))->with('title', "UDC | List Album $albumID");
     }
 }

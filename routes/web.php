@@ -28,9 +28,7 @@ Route::middleware("redirectIfAuth")->group(function(){
   Route::middleware("auth")->group(function(){
     Route::get("/home", [FotoController::class, "index"])->name("home");
     Route::get("/table-data", [ShiftController::class, "listData"])->name("showdata");
-    Route::get("/home/album", [AlbumController::class, "index"])->name("home.album");
-  Route::get('/home/foto', [FotoController::class, "index"])->name("home.gallery");
-  
+    Route::get("/home/album", [AlbumController::class, "index"])->name("home.album");  
   Route::get('/album/create', [AlbumController::class, "create"])->name("create.album");
 
   Route::get('/foto/create', [FotoController::class, "create"])->name("create.gallery");
@@ -52,6 +50,19 @@ Route::post('post-album', [AlbumController::class, "store"])->name('post.album')
 
 Route::post('post-gambar', [FotoController::class, "store"])->name('post-gambar');
 
+
+Route::get('/bootstrap', function()
+{
+ return view('bootstraplearn')->with("title", "Bootstrap Playground"); 
+})->middleware('auth');
+
+
+Route::get('/home/settings', function()
+{
+  return view("layout.settings")->with("title", "UDC | Settings Page");
+})->middleware("auth")->name('logoutPath');
+
+Route::delete('/foto/${fotoID}', [FotoController::class, "destroy"])->name('foto.destroy');
 // Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
 
 // Route::get('/', [ShiftController::class, "directGuest"]);

@@ -7,19 +7,6 @@
     <title>{{ $title }}</title>
 </head>
 <body>
- @extends('layout.main')
- @section('content')
-
- @foreach($assocAlbum as $assoc)
-
-<div class="card">
-    <div class="card-img-top">
-        <div>{{ $assoc }}</div>
-    </div>
-</div>
-
-@endforeach
-
- @endsection   
+    
 </body>
 </html>

@@ -7,19 +7,14 @@
     <title>{{ $title }}</title>
 </head>
 <body>
- @extends('layout.main')
- @section('content')
+    @extends('layout.main')
 
- @foreach($assocAlbum as $assoc)
-
-<div class="card">
-    <div class="card-img-top">
-        <div>{{ $assoc }}</div>
-    </div>
-</div>
-
-@endforeach
-
- @endsection   
+    @section('content')
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        @method('POST')
+    <button type="submit" class="btn btn-primary">LOGOUT</a>
+    </form>
+    @endsection
 </body>
 </html>
