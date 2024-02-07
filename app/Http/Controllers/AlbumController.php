@@ -57,7 +57,7 @@ $dataAlbum = album::all();
         $dataSuccess = album::create($dataIsi);
     if($dataSuccess) {
         Session::flash("succesful", $request->namAlbum);
-        return redirect()->back();
+        return redirect()->route("home.album");
     } else {
 Log::info("Album failed to be added.");
 return redirect()->back();    

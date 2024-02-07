@@ -39,20 +39,54 @@ Foto
         {{ $foto->judulFoto }}
     </td>
 
-<td><img src="{{ asset('img')  . '/' . $foto->lokasiFile }}" alt=""></td>
+<td><img src="{{ asset('img')  . '/' . $foto->lokasiFile }}" alt="" style="width: 270px; height:210px;"></td>
 <td>
-    <button class="btn btn-success edit-foto" data-toggle="modal" >
+    <button class="btn btn-success edit-foto" data-bs-toggle="modal" data-bs-target="#editModal{{ $foto->fotoID }}" data-id="{{ $foto->fotoID }}">
   Edit
     </button>
-    <button type="button" class="btn btn-danger delete-button" data-toggle="modal" data-target="#deleteModal{{ $foto->fotoID }}" data-id="{{$foto->fotoID}}">DELETE</button>
+    <button type="button" class="btn btn-danger delete-button" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $foto->fotoID }}" data-id="{{$foto->fotoID}}">DELETE</button>
 </td>
 </tr>
+
+<div class="modal fade" id="editModal{{ $foto->fotoID }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Edit This Foto</h5>
+    <button type="button" class="close" aria-label="Close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></div>    
+    <div class="modal-body">
+        <form action="{{ route('edit.foto', $foto->fotoID) }}" method="POST" class="form-group" enctype="multipart/form-data">
+        @csrf
+    @method('PUT')
+    <div class="form-group pb-4">
+        <label for="judulFoto" class="fw-300 d-flex flex-start" style="font-family:'Times New Roman', Times, serif; width:340px;">Judul Foto</label>
+        <input type="text" name="judulFoto" id="judulFoto" placeholder="{{ $foto->judulFoto }}" class="form-control">
+    </div>
+
+    <div class="form-group pb-4">
+        <label for="judulFoto" class="fw-300 d-flex flex-start" style="font-family:'Times New Roman', Times, serif; width:340px;">Deskripsi Foto</label>
+        <input type="text" name="deskripsiFoto" id="deskripsiFoto" placeholder="{{ $foto->deskripsiFoto }}" class="form-control">
+    </div>
+    <div class="form-group pb-4">
+        <label for="judulFoto" class="fw-300 d-flex flex-start" style="font-family:'Times New Roman', Times, serif; width:340px;">Upload File</label>
+        <input type="file" name="lokasiFile" id="lokasiFile" placeholder="{{ $foto->lokasiFile }}" class="form-control">
+    </div>
+
+    <button class="btn btn-success" type="submit">Save</button>
+    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancel</button>
+</form>
+    </div>
+    </div>
+    </div>
+</div>
+</div>
+
 <div class="modal fade" id="deleteModal{{ $foto->fotoID }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalLabel">Delete foto</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -62,7 +96,8 @@ Foto
                     @csrf
                     @method('DELETE')
                     <br>
-                    <button type="submit" class="btn btn-danger button-delete">YES</button>
+                    <button class="btn btn-danger button-delete" type="submit">Delete</button>
+                    <button class="btn-warning button-warning" data-bs-dismiss="modal" type="button">Cancel</button>
                 </form>
             </div>
         </div>
@@ -73,9 +108,9 @@ Foto
 </table>
 </div>
 
-{{-- <div class="btn btn-primary">
+ <div class="btn btn-primary">
     
-<a href="{{ route('create.gallery') }}" style="text-decoration: none; color:aliceblue">Tambahkan Foto</a> --}}
+<a href="{{ route('create.gallery') }}" style="text-decoration: none; color:aliceblue">Tambahkan Foto</a>
 
 </div>
 @endsection

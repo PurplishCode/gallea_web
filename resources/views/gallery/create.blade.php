@@ -27,7 +27,9 @@ e<!DOCTYPE html>
             <div class="d-flex justify-content-center text-center pt-4 ">
                 <div class="justify-content-center text-center pt-4 align-items-center">
                
+                   <div class="pb-4">
                     <input class="form-control border-secondary" type="text" placeholder="judulFoto" style="width: 310px;" aria-describedby="basic-addon1" name="judulFoto">
+                   </div>
                      
                     <input class="form-control border-secondary" type="text" placeholder="deskripsiFoto" style="width: 310px;" aria-describedby="basic-addon1" name="deskripsiFoto">      
                      

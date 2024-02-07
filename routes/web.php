@@ -63,6 +63,8 @@ Route::get('/home/settings', function()
 })->middleware("auth")->name('logoutPath');
 
 Route::delete('/foto/${fotoID}', [FotoController::class, "destroy"])->name('foto.destroy');
+
+Route::put('/foto/{fotoID}', [FotoController::class, "edit"])->name("edit.foto")->middleware("auth");
 // Route::get("/login", [ShiftController::class, "directLogin"])->middleware("guest");
 
 // Route::get('/', [ShiftController::class, "directGuest"]);

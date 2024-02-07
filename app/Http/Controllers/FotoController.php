@@ -95,6 +95,8 @@ Log::info($dataFoto);
 
 if($storePath == true) {
     Foto::create($dataFoto);
+
+    return redirect()->route("home");
 }
 
 
@@ -118,10 +120,23 @@ return redirect()->back()->with("succesful", "Data was succesfully created!");
     public function edit(Request $request, $fotoID)
     {
     
-        $fotoTake = Foto::find($fotoID);
-$fotoTake->update($request->all());
+ 
 
-return redirect()->route("");
+$requestFile = $request->file("lokasiFile");
+$namaExtensi = $requestFile->extension();
+$namaFile = date('ymdhis') . '.' . $namaExtensi;
+$requestFile->move(public_path('img'), $namaFile);
+
+$updatedData = [
+    "judulFoto" => $request->judulFoto,
+    "deskripsiFoto" => $request->deskripsiFoto,
+    "lokasiFile" => $namaFile,
+];
+
+       $fotoTake = Foto::find($fotoID);
+$fotoTake->update($updatedData);
+
+return redirect()->route("home");
     }
 
     /**
@@ -137,7 +152,7 @@ return redirect()->route("");
      */
     public function destroy($fotoID)
     {
-        $fotoData = Foto::find($fotoID);
+        $fotoData = Foto::where('fotoID', $fotoID);
 
         if(!$fotoData) {
             Log::info("Data is unsuccesful to delete.");
@@ -145,5 +160,6 @@ return redirect()->route("");
         }
 
         $fotoData->delete();
+        return redirect()->back();
     }
 }
