@@ -11,6 +11,8 @@ class KomentarFoto extends Model
 
     protected $table = "komentar_foto";
     
+protected $primaryKey = "komentarID";
+
     protected $fillable =[
 "isiKomentar"
     ];

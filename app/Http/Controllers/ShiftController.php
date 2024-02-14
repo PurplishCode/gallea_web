@@ -52,7 +52,7 @@ public function welcome()
             $credentials = $request->only('email','password');
 
             if(Auth::attempt($credentials)) {
-        // Authetication checked. Do something.
+        // Authetrication checked. Do something.
     Log::info("Logged in!", $credentials);
 
 Session::flash("successful", "Succesfully logged in!");
@@ -87,8 +87,7 @@ Session::flash("successful", "Succesfully logged in!");
 
 
 
-    User::create($fullData);
-    
+    User::create($fullData);    
 toast("succesful", "The user has successfully logged in!", "top-right");
 
     return redirect()->route("login.display")->with("succesful", "Succesfully created an Account!");

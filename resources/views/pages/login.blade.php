@@ -43,7 +43,7 @@
 <div class="pt-4">
     <button type="submit" class="btn btn-secondary" style="width: 250px">SUBMIT</button>
 </div>
-    </form>   
+    </form>  
     </div>  
 </div>  
 </section>

@@ -39,7 +39,7 @@ protected $primaryKey = "userID";
 
 public function album()
 {
-    return $this->hasMany(album::class, "albumID");
+    return $this->hasMany(album::class, "userID");
 }
 
 public function komentarFoto()

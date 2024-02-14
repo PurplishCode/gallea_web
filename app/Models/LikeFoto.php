@@ -11,6 +11,8 @@ class LikeFoto extends Model
 
     protected $table = "like_Foto";
 
+    protected $primaryKey = 'likeID';
+
     // No need for fillable. It'll be inputted within the controllers.
 
     public function foto()
